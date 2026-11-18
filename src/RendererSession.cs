@@ -126,6 +126,7 @@ public sealed class RendererSession(Cdp cdp, string root, string source, string 
             "badges" => async () => await Badges.FetchAsync().ConfigureAwait(false),
             "badge-submit" => async () => await Badges.SubmitAsync(payload).ConfigureAwait(false),
             "sync" => async () => await Sync.HandleAsync(root, payload).ConfigureAwait(false),
+            "quickcss" => () => Task.FromResult(QuickCss.Handle(root, payload)),
             "sound" => async () => await Web.SoundAsync(payload).ConfigureAwait(false),
             "image" => async () => await Web.ImageAsync(payload).ConfigureAwait(false),
             "update-status" when updates is not null => async () => await updates.StatusAsync(payload is true).ConfigureAwait(false),
